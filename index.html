@@ -905,6 +905,7 @@ Optimisation des réservations de restaurants par un système multi-agents basé
 
    
     <!--==================== CONTACT ME ====================-->
+    
     <section class="contact section" id="contact">
         <div class="section__title">Contactez-moi</div>
         <span class="section__subtitle">Prenez contact</span>
@@ -936,30 +937,31 @@ Optimisation des réservations de restaurants par un système multi-agents basé
                     </div>
                 </div>
             </div>
+            <form   class="contact__form grid">
 
-            <form action="traitement_formulaire.php" method="post" class="contact__form grid">
+            
                 <div class="contact__inputs grid">
                     <div class="contact__content">
                         <label for="" class="contact__label">Nom</label>
-                        <input type="text" class="contact__input" name="name">
+                        <input type="text" class="contact__input" name="name" id ="name">
                     </div>
                     <div class="contact__content">
                         <label for="" class="contact__label">Email</label>
-                        <input type="email" class="contact__input" name="email">
+                        <input type="email" class="contact__input" name="email" id ="email">
                     </div>
                 </div>
                
                 <div class="contact__content">
                     <label for="" class="contact__label">Message</label>
-                    <textarea name="message" id="" cols="0" rows="7" class="contact__input"></textarea>
-                    <input type="text" class="contact__input">
+                    <textarea name="message" id="message" cols="0" rows="7" class="contact__input"></textarea>
+                    <input type="text"  class="contact__input">
 
                   
                 </div>
             
                 <!-- Afficher le message de succès ici -->
                
-                <button type="submit" class="button button--flex">
+                <button type="submit" onclick="sendMail()" name="submit" class="button button--flex">
                     Envoyer Message
                     <i class="uil uil-message button__icon"></i>
                 </button>
@@ -968,6 +970,7 @@ Optimisation des réservations de restaurants par un système multi-agents basé
         </div>
        
     </section>
+
 </main>
 
 <!--==================== FOOTER ====================-->
@@ -1012,5 +1015,36 @@ Optimisation des réservations de restaurants par un système multi-agents basé
 
 <!--==================== MAIN JS ====================-->
 <script src="assets/js/main.js"></script>
+
+
+
+<script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+<script type="text/javascript">
+   (function(){
+      emailjs.init({
+        publicKey: "qlx8fsmGH8aGFOaY4",
+      });
+   })();
+</script>
+
+
+<script>
+    function sendMail(){
+        event.preventDefault();
+        var params = {
+            name: document.getElementById('name').value,
+            email: document.getElementById('email').value,
+            message: document.getElementById('message').value,
+        };
+        emailjs.send('service_5ifbw9q', 'template_vxmlkrh', params)
+        .then(function(res) {
+            alert('Email sent successfully!');
+        }, function(error) {
+            alert('Failed to send email.');
+        });
+    }
+    </script>
 </body>
 </html>
